@@ -1,0 +1,51 @@
+flowchart TD
+
+    A[Streamlit Analyst UI]
+
+    A --> B[Investigation Orchestrator]
+
+    B --> C[Customer Analysis]
+    B --> D[Transaction Analysis]
+    B --> E[Case History Analysis]
+
+    C --> F[Deterministic Rules Engine]
+    D --> F
+    E --> F
+
+    F --> G[Investigation Engine]
+
+    G --> G1[Alert Evidence]
+    G --> G2[7-Day Investigation Context]
+    G --> G3[Historical Customer Context]
+
+    G1 --> H[Structured Evidence Package]
+    G2 --> H
+    G3 --> H
+
+    H --> I[AI Investigation Layer]
+
+    I --> I1[NVIDIA Provider]
+    I --> I2[Gemini Fallback]
+
+    I1 --> J[Structured AI Result]
+    I2 --> J
+
+    J --> K[Pydantic Validation]
+    K --> L[Evidence Reference Validation]
+
+    L --> M[Human Analyst Review]
+
+    M --> N{Analyst Decision}
+
+    N --> O[CLOSE]
+    N --> P[OVERRIDE]
+    N --> Q[ESCALATE]
+
+    O --> R[SQLite Audit Persistence]
+    P --> R
+    Q --> R
+
+    R --> S[Operational Analytics]
+    S --> T[KPI Dashboard]
+
+    U[Illustrative ROI Model] --> T
