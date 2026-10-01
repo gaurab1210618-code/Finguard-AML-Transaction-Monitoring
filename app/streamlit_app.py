@@ -533,8 +533,8 @@ if (
                 )
             ].copy()
 
-        # Keep the same chronological ordering used by the
-        # investigation context where possible.
+            # Keep the same chronological ordering used by the
+            # investigation context where possible.
             if "timestamp" in context_df.columns:
 
                 context_df = context_df.sort_values(
@@ -554,7 +554,7 @@ if (
                 "investigation context."
             )
 
-        
+
     # -------------------------------------------------------------
     # Contextual indicators
     # -------------------------------------------------------------
@@ -710,7 +710,7 @@ if st.session_state.get("ai_unavailable", False):
         "indicators above. A human decision should not be submitted "
         "through the AI-assisted workflow until an AI result is available."
     )
-    
+
 if (
     "ai_result" in st.session_state
     and st.session_state.get(
@@ -867,14 +867,16 @@ if (
                     decision
                 )
 
-                st.success(
-                    f"Decision saved successfully. "
-                    f"Case ID: {case_id}"
-                )
-
+                # Store the case ID so it can be shown after
+                # the automatic Streamlit rerun.
                 st.session_state[
                     "last_case_id"
                 ] = case_id
+
+                # Re-run the complete application so the KPI
+                # dashboard and audit trail immediately reflect
+                # the newly persisted decision.
+                st.rerun()
 
             except Exception as error:
 
@@ -892,6 +894,18 @@ st.divider()
 st.header("📜 Audit Trail")
 
 audit_records = get_all_audit_records()
+
+# Show the save confirmation after the automatic rerun.
+if "last_case_id" in st.session_state:
+
+    st.success(
+        f"Decision saved successfully. "
+        f"Case ID: {st.session_state['last_case_id']}"
+    )
+
+    # Prevent the success message from appearing again on
+    # unrelated future Streamlit reruns.
+    del st.session_state["last_case_id"]
 
 if audit_records:
 
