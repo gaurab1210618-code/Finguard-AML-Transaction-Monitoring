@@ -1,12 +1,17 @@
 import sqlite3
 
-from app.audit_db import get_connection
+from app.audit_db import (
+    get_connection,
+    initialize_database,
+)
 
 
 def get_total_cases() -> int:
     """
     Return the total number of persisted audit cases.
     """
+
+    initialize_database()
 
     connection = get_connection()
 
@@ -28,6 +33,8 @@ def get_decision_distribution() -> list[dict]:
     """
     Return case counts grouped by analyst decision.
     """
+
+    initialize_database()
 
     connection = get_connection()
 
@@ -54,6 +61,8 @@ def get_risk_distribution() -> list[dict]:
     Return case counts grouped by AI risk assessment.
     """
 
+    initialize_database()
+
     connection = get_connection()
 
     try:
@@ -78,6 +87,8 @@ def get_ai_human_outcomes() -> list[dict]:
     """
     Compare AI recommendation with final analyst decision.
     """
+
+    initialize_database()
 
     connection = get_connection()
 
@@ -107,6 +118,8 @@ def get_override_rate() -> float:
     Return the percentage of cases where the analyst
     explicitly selected OVERRIDE.
     """
+
+    initialize_database()
 
     connection = get_connection()
 
@@ -141,6 +154,8 @@ def get_escalation_rate() -> float:
     Return the percentage of cases escalated by analysts.
     """
 
+    initialize_database()
+
     connection = get_connection()
 
     try:
@@ -174,6 +189,8 @@ def get_provider_distribution() -> list[dict]:
     Return case counts grouped by AI provider.
     """
 
+    initialize_database()
+
     connection = get_connection()
 
     try:
@@ -200,6 +217,8 @@ def get_cases_by_date() -> list[dict]:
 
     recorded_at is stored as UTC ISO-8601 text.
     """
+
+    initialize_database()
 
     connection = get_connection()
 
