@@ -1,4 +1,4 @@
-﻿scenario_id,customer_id,alert_id,scenario_name,expected_risk_band,expected_reason,baseline_definition
+scenario_id,customer_id,alert_id,scenario_name,expected_risk_band,expected_reason,baseline_definition
 SCN_001,CUST-0001,ALT-0001,False Positive,LOW,Activity is explainable and broadly consistent with customer history.,"profile_avg = monthly_avg_volume / monthly_avg_txn_count; alert if txn > 2.5x profile_avg. For CUST-0001 profile_avg ~3143, injected ~26714 ~8.5x."
 SCN_002,CUST-0002,ALT-0002,Structuring-like Pattern,HIGH,Multiple clustered transactions materially deviate from the normal customer pattern.,"Normal avg ~3273 (180k/55). Clustered amounts 48.2k-49k (~15x baseline) within 30h, CV < 5%."
 SCN_003,CUST-0003,ALT-0003,Rapid Inbound-Outbound Pattern,HIGH,Rapid movement of funds and substantial deviation from historical customer behavior.,"Baseline monthly vol 70k-90k, profile avg ~4444. Injected 250k/240k and 300k/290k in-out within 6h windows."
